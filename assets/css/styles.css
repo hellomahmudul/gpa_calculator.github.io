@@ -9,7 +9,7 @@
   --nav-width: 68px;
 
   /*===== Colors =====*/
-  --first-color: #4723D9;
+  --first-color: #2c9132;
   --first-color-light: #AFA5D9;
   --white-color: #F7F6FB;
   
@@ -209,7 +209,7 @@ a{
 
 .card {
   width: 250px;
-  background-color: #4723D9;
+  background-color: #2c9132;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 15px;
@@ -225,7 +225,7 @@ a{
 .cardmain {
   width: 75vw;          /* Full viewport width */
   height: 80vh;
-  background-color: #4723D9;
+  background-color: #2c9132;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
