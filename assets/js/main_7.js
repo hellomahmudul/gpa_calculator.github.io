@@ -56,7 +56,6 @@ function calculateGPAAndScroll(customMessage) {
     var cc7 = parseFloat(document.getElementById("cc7").value);
     var gp7 = parseFloat(document.getElementById("gp7").value);
 
-
     // Repeat for other courses
 
     // Replace the following lines with your actual GPA calculation logic
@@ -71,14 +70,6 @@ function calculateGPAAndScroll(customMessage) {
         cc7 * gp7) /
       (cc1 + cc2 + cc3 + cc4 + cc5 + cc6 + cc7);
    
-
-    // // Display results
-    // var resultContainer = document.getElementById("resultContainer");
-    // resultContainer.style.display = "block";
-    // resultContainer.innerHTML =
-    //   "<p>Your 1st Semester GPA is :<br> <strong>" +
-    //   calculatedGPA.toFixed(2) +
-    //   "</strong></p>";
 
             // Display results
         var resultContainer = document.getElementById("resultContainer");
