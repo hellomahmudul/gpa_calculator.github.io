@@ -1,0 +1,265 @@
+/* starting of day-night mode style */
+
+.day-mode {
+    background-color: #f5f5f5;
+    color: #111;
+}
+
+.night-mode {
+    background-color: #111;
+    color: #f5f5f5;
+}
+
+/* Toggle container */
+.day-night-toggle {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.day-night-toggle input {
+    display: none;
+}
+
+.day-night-toggle label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    height: 30px;
+    background: #00d4ff;
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.day-night-toggle label i {
+    color: #fff;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+/* Ball */
+.day-night-toggle .ball {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* Move ball when checked */
+#toggle-theme:checked + label .ball {
+    transform: translateX(30px);
+}
+
+/* Optional: change icon colors when checked */
+#toggle-theme:checked + label i.bx-sun {
+    color: #ffdc00;
+}
+#toggle-theme:checked + label i.bx-moon {
+    color: #fff;
+}
+/* day-night mode style executed here && ends the style */
+
+
+
+
+/* Wrapper */
+.wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(20, 20, 20, 0.85);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease-in-out;
+}
+.wrapper:hover {
+    transform: translateY(-3px);
+}
+
+/* Headings */
+h1 {
+    padding-top: 100px;
+    text-align: center;
+    margin: 20px 0 30px;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+}
+
+/* Flex rows */
+.form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+/* Make inputs, select and button balanced */
+.form-row.top-row input,
+.form-row.top-row select,
+.form-row.top-row button {
+    flex: 1;
+    max-width: 200px; /* keeps them neat */
+}
+
+/* Bottom row: Calc GP + Clear take half-half */
+.form-row.bottom-row button {
+    flex: 1;
+    padding: 14px 0;
+}
+
+
+/* Input Boxes */
+input[type="number"], 
+input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-align: center;
+    font-size: 0.95rem;
+    background: #dfd7d7;
+    color: #f1f1f1;
+    transition: all 0.2s ease-in-out;
+}
+input[type="number"]:focus, 
+input[type="text"]:focus {
+    background: #00d4ff;
+    color: #000;
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+/* Table */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1b1b1b;
+}
+
+thead {
+    background: #00d4ff;
+    color: #000;
+    font-weight: bold;
+}
+
+thead th {
+    padding: 14px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+tbody tr {
+    border-bottom: 1px solid #333;
+    transition: background 0.2s ease;
+}
+tbody tr:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+tbody td {
+    padding: 12px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    text-transform: uppercase;
+}
+
+/* Buttons */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    width: 100%;  /* Full width inside table cell */
+    padding: 14px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00d4ff, #0077ff);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover  {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 212, 255, 0.45);
+}
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.95rem;
+    background: #2a2a2a;
+    color: #f1f1f1;
+    text-align: center;
+    appearance: none; /* removes default arrow */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Focus / Active */
+select:focus {
+    background: #00d4ff;
+    color: #000;
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+/* Custom dropdown arrow */
+select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px 18px;
+    padding-right: 36px; /* make space for arrow */
+}
+
+
+/* GPA Result Box */
+.result-box {
+    margin-top: 25px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(0, 212, 255, 0.1);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00d4ff;
+    box-shadow: inset 0 0 8px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+.result-box.success {
+    color: #00ffae;
+}
+.result-box.error {
+    color: #ff4c4c;
+}
+
+/* Hide Element Utility */
+.display-none {
+    display: none;
+}

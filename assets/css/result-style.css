@@ -1,0 +1,123 @@
+/* ===== General Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* ===== Page Background ===== */
+body {
+  padding-top: 30px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #f7f9fc, #c3ddf3);
+}
+
+/* ===== Form Container ===== */
+form {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #319ab7;
+}
+
+/* ===== Heading ===== */
+h2 {
+  font-family: "Trocchi", serif;
+  color: #264653;
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ===== Stylish Horizontal Line ===== */
+hr {
+  border: none;
+  border-top: 3px double #319ab7;
+  color: #319ab7;
+  margin: 15px 0;
+  overflow: visible;
+}
+
+
+hr:after {
+  background: #fff;
+  content: "GPA CALCULATOR";
+  padding: 0 4px;
+  position: relative;
+  top: -13px;
+}
+
+
+/* ===== Labels ===== */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #264653;
+}
+
+/* ===== Input Fields ===== */
+input {
+  font-family: Courier, 'courier new', serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 18px;
+  border: 2px solid #b7d5d4;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2a9d8f;
+  box-shadow: 0 0 6px rgba(42, 157, 143, 0.4);
+}
+
+/* Read-only credit fields style */
+input[readonly] {
+  background-color: #eef6f5;
+  color: #555;
+  font-weight: bold;
+  cursor: not-allowed;
+}
+
+/* ===== Button Styling ===== */
+button {
+  width: 100%;
+  background: #319ab7;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+}
+
+button:hover {
+  background: #176d85;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ===== Result Box ===== */
+.result {
+  margin-top: 15px;
+  padding: 15px;
+  border: 2px solid #319ab7;
+  border-radius: 8px;
+  background-color: #f1fbfa;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #264653;
+  font-weight: bold;
+  text-align: center;
+}
+
