@@ -205,7 +205,21 @@ input[type="reset"]:hover  {
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(0, 212, 255, 0.45);
 }
+/* Delete button */
+.delete-btn1 {
+    background-color: #ff4c4c;
+    border: none;
+    color: #fff;
+    padding: 6px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
 
+.delete-btn1:hover {
+    background-color: #d93636;
+}
 select {
     width: 100%;
     padding: 10px 12px;
@@ -262,4 +276,5 @@ select {
 /* Hide Element Utility */
 .display-none {
     display: none;
+
 }
