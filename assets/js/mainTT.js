@@ -1,3 +1,38 @@
+/*===== SHOW NAVBAR  =====*/ 
+const showNavbar = (toggleId, navId, bodyId, headerId) =>{
+    const toggle = document.getElementById(toggleId),
+    nav = document.getElementById(navId),
+    bodypd = document.getElementById(bodyId),
+    headerpd = document.getElementById(headerId)
+
+    // Validate that all variables exist
+    if(toggle && nav && bodypd && headerpd){
+        toggle.addEventListener('click', ()=>{
+            // show navbar
+            nav.classList.toggle('show')
+            // change icon
+            toggle.classList.toggle('bx-x')
+            // add padding to body
+            bodypd.classList.toggle('body-pd')
+            // add padding to header
+            headerpd.classList.toggle('body-pd')
+        })
+    }
+}
+
+showNavbar('header-toggle','nav-bar','body-pd','header')
+
+/*===== LINK ACTIVE  =====*/ 
+const linkColor = document.querySelectorAll('.nav__link')
+
+function colorLink(){
+    if(linkColor){
+        linkColor.forEach(l=> l.classList.remove('active'))
+        this.classList.add('active')
+    }
+}
+linkColor.forEach(l=> l.addEventListener('click', colorLink))
+
 const add = document.querySelector("#add");
 const courseCode = document.querySelector("#course-code");
 const unitLoad = document.querySelector("#unit-load");
@@ -10,8 +45,93 @@ const clear = document.querySelector("#clear");
 
 let gpArry = [];
 
-// ==================== GPA Calculation ====================
-function recalcGPA() {
+// Add new course
+add.addEventListener("click", () => {
+  if (
+    courseCode.value === "" ||
+    unitLoad.value <= 0 ||
+    grade.selectedIndex === 0
+  ) {
+    alert("Wrong input, check and try again");
+  } else {
+    const tr = document.createElement("tr");
+    const tdCourseCode = document.createElement("td");
+    tdCourseCode.innerHTML = courseCode.value;
+    const tdUnitLoad = document.createElement("td");
+    tdUnitLoad.innerHTML = unitLoad.value;
+    const tdGrade = document.createElement("td");
+    tdGrade.innerHTML = grade.options[grade.selectedIndex].text;
+
+    tr.appendChild(tdCourseCode);
+    tr.appendChild(tdUnitLoad);
+    tr.appendChild(tdGrade);
+    tbody.appendChild(tr);
+
+    table.classList.remove("display-none");
+    calcGp.classList.remove("display-none");
+    clear.classList.remove("display-none");
+
+    gpArry.push({
+      unitLoad: parseFloat(unitLoad.value),
+      grade: parseFloat(grade.options[grade.selectedIndex].value),
+    });
+
+    // Reset input fields
+    courseCode.value = "";
+    unitLoad.value = "";
+    grade.selectedIndex = 0;
+  }
+});
+
+// // Calculate GPA using methodology: sum(c*g) / sum(c)
+// calcGp.addEventListener("click", () => {
+//   let totalCredits = 0;
+//   let totalWeighted = 0;
+
+//   gpArry.forEach((course) => {
+//     totalCredits += course.unitLoad;
+//     totalWeighted += course.unitLoad * course.grade;
+//   });
+
+//   if (totalCredits === 0) {
+//     alert("No courses added yet!");
+//     return;
+//   }
+
+//   let gpa = (totalWeighted / totalCredits).toFixed(2);
+
+//   const tr = document.createElement("tr");
+
+//   const tdTotalUnitLoad = document.createElement("td");
+//   tdTotalUnitLoad.innerHTML = `Your total credits: ${totalCredits}`;
+
+//   const tdGpa = document.createElement("td");
+//   tdGpa.setAttribute("colspan", "2");
+//   tdGpa.innerHTML = `Your GPA: ${gpa}`;
+
+//   tr.appendChild(tdTotalUnitLoad);
+//   tr.appendChild(tdGpa);
+
+//   if (tfoot.querySelector("tr") !== null) {
+//     tfoot.querySelector("tr").remove();
+//   }
+//   tfoot.appendChild(tr);
+// });
+
+// // Clear everything
+// clear.addEventListener("click", () => {
+//   gpArry = [];
+//   tbody.innerHTML = "";
+//   tfoot.innerHTML = "";
+
+//   table.classList.add("display-none");
+//   calcGp.classList.add("display-none");
+//   clear.classList.add("display-none");
+// });
+
+
+// Calculate GPA using methodology: sum(c*g) / sum(c)
+calcGp.addEventListener("click", () => {
   let totalCredits = 0;
   let totalWeighted = 0;
 
@@ -25,6 +145,7 @@ function recalcGPA() {
   const gpaResultEl = document.getElementById("gpa-result");
 
   if (totalCredits === 0) {
+    // Show error style
     resultBox.classList.remove("success");
     resultBox.classList.add("error");
     totalCreditsEl.textContent = "";
@@ -35,131 +156,15 @@ function recalcGPA() {
 
   let gpa = (totalWeighted / totalCredits).toFixed(2);
 
+  // Show success style
   resultBox.classList.remove("error");
   resultBox.classList.add("success");
   totalCreditsEl.textContent = `Your total credits: ${totalCredits}`;
   gpaResultEl.textContent = `Your GPA: ${gpa}`;
+
   resultBox.classList.remove("display-none");
-}
-
-// ==================== Add new course ====================
-add.addEventListener("click", () => {
-  if (
-    courseCode.value === "" ||
-    unitLoad.value <= 0 ||
-    grade.selectedIndex === 0
-  ) {
-    alert("Wrong input, check and try again");
-  } else {
-    const tr = document.createElement("tr");
-
-    const tdCourseCode = document.createElement("td");
-    tdCourseCode.innerHTML = courseCode.value;
-
-    const tdUnitLoad = document.createElement("td");
-    tdUnitLoad.innerHTML = unitLoad.value;
-
-    const tdGrade = document.createElement("td");
-    tdGrade.innerHTML = grade.options[grade.selectedIndex].text;
-
-    // ===== Delete button cell =====
-    const tdAction = document.createElement("td");
-    const delBtn = document.createElement("button1");
-    delBtn.classList.add("delete-btn1");
-    delBtn.innerHTML = `<i class='bx bx-trash'></i>`;
-    tdAction.appendChild(delBtn);
-
-    // Add delete event
-    delBtn.addEventListener("click", () => {
-      // Remove row from DOM
-      tr.remove();
-
-      // Remove from array
-      gpArry = gpArry.filter(
-        (c) =>
-          !(
-            c.unitLoad === parseFloat(unitLoad.value) &&
-            c.grade === parseFloat(grade.options[grade.selectedIndex].value) &&
-            c.courseCode === courseCode.value
-          )
-      );
-
-      recalcGPA();
-    });
-
-    tr.appendChild(tdCourseCode);
-    tr.appendChild(tdUnitLoad);
-    tr.appendChild(tdGrade);
-    tr.appendChild(tdAction);
-    tbody.appendChild(tr);
-
-    table.classList.remove("display-none");
-    calcGp.classList.remove("display-none");
-    clear.classList.remove("display-none");
-
-    gpArry.push({
-      courseCode: courseCode.value,
-      unitLoad: parseFloat(unitLoad.value),
-      grade: parseFloat(grade.options[grade.selectedIndex].value),
-    });
-
-    // Reset input fields
-    courseCode.value = "";
-    unitLoad.value = "";
-    grade.selectedIndex = 0;
-    recalcGPA(); // auto-update result
-  }
 });
 
-// ==================== Calculate GPA ====================
-calcGp.addEventListener("click", recalcGPA);
-
-// ==================== Export / Print ====================
-const exportBtn = document.getElementById("export");
-
-// Show export button whenever table is visible
-const showExportButton = () => {
-  if (!table.classList.contains("display-none")) {
-    exportBtn.classList.remove("display-none");
-  } else {
-    exportBtn.classList.add("display-none");
-  }
-};
-add.addEventListener("click", showExportButton);
-calcGp.addEventListener("click", showExportButton);
-
-exportBtn.addEventListener("click", () => {
-  const tableClone = table.cloneNode(true);
-  const resultClone = document.getElementById("result-section").cloneNode(true);
-
-  const printWindow = window.open("", "", "width=800,height=600");
-
-  printWindow.document.open();
-  printWindow.document.write(`
-    <html>
-      <head>
-        <title>CGPA_Export</title>
-        <link rel="stylesheet" href="assets/css/uni_exportstyle.css">
-        <style>
-          body { margin:16mm; font-family: Arial, sans-serif; }
-          .display-none { display: none !important; }
-        </style>
-      </head>
-      <body>
-        ${tableClone.outerHTML}
-        ${resultClone.outerHTML}
-      </body>
-    </html>
-  `);
-  printWindow.document.close();
-
-  printWindow.onload = function () {
-    printWindow.print();
-    printWindow.close();
-  };
-});
-
-// ==================== Clear Table ====================
 clear.addEventListener("click", () => {
   gpArry = [];
   tbody.innerHTML = "";
@@ -168,8 +173,13 @@ clear.addEventListener("click", () => {
   table.classList.add("display-none");
   calcGp.classList.add("display-none");
   clear.classList.add("display-none");
-  exportBtn.classList.add("display-none");
 
+  // Hide result box
   const resultBox = document.getElementById("result-section");
   resultBox.classList.add("display-none");
 });
+
+
+
+
+  
