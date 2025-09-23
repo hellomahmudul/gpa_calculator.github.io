@@ -61,41 +61,6 @@ add.addEventListener("click", () => {
         creditsValue = parseFloat(totalCreditsSelect.value);
     }
 
-
-// Elements
-const add = document.querySelector("#add");
-const semester = document.querySelector("#semester");       
-const totalCreditsSelect = document.querySelector("#total-credits-select"); 
-const customCredits = document.querySelector("#custom-credits");
-const gpaInput = document.querySelector("#gpa");         
-const tbody = document.querySelector("#tbody");
-const table = document.querySelector("#table");
-const calcGp = document.querySelector("#calc-gp");
-const clear = document.querySelector("#clear");
-
-// Show/hide custom credits input
-totalCreditsSelect.addEventListener("change", () => {
-    if (totalCreditsSelect.value === "other") {
-        customCredits.style.display = "inline-block";
-        customCredits.focus();
-    } else {
-        customCredits.style.display = "none";
-        customCredits.value = "";
-    }
-});
-
-let semArry = [];
-
-// Add new semester
-add.addEventListener("click", () => {
-    // Determine selected credits value
-    let creditsValue;
-    if (totalCreditsSelect.value === "other") {
-        creditsValue = parseFloat(customCredits.value);
-    } else {
-        creditsValue = parseFloat(totalCreditsSelect.value);
-    }
-
     if (
         semester.selectedIndex === 0 ||
         !creditsValue ||
@@ -114,29 +79,9 @@ add.addEventListener("click", () => {
     const tdGpa = document.createElement("td");
     tdGpa.textContent = parseFloat(gpaInput.value).toFixed(2);
 
-
-    // Action column
-    const tdAction = document.createElement("td");
-    const delBtn = document.createElement("button1");
-    delBtn.classList.add("delete-btn1");
-// Use Boxicons trash icon
-delBtn.innerHTML = `<i class='bx bx-trash'></i>`;
-
-
-    // Delete row functionality
-    delBtn.addEventListener("click", () => {
-        tbody.removeChild(tr); // remove row from table
-        semArry = semArry.filter(
-            sem => !(sem.semester === semester.value && sem.credits === creditsValue && sem.gpa === parseFloat(gpaInput.value))
-        );
-        recalcCGPA(); // update result instantly
-    });
-    
-    tdAction.appendChild(delBtn);
     tr.appendChild(tdSemester);
     tr.appendChild(tdCredits);
     tr.appendChild(tdGpa);
-    tr.appendChild(tdAction);
     tbody.appendChild(tr);
 
     table.classList.remove("display-none");
@@ -145,12 +90,9 @@ delBtn.innerHTML = `<i class='bx bx-trash'></i>`;
 
     // Save to array
     semArry.push({
-        semester: semester.value,
         credits: creditsValue,
         gpa: parseFloat(gpaInput.value)
     });
-
-    recalcCGPA(); // auto-update result
 
     // Reset inputs
     semester.selectedIndex = 0;
@@ -161,7 +103,7 @@ delBtn.innerHTML = `<i class='bx bx-trash'></i>`;
 });
 
 // Calculate CGPA
-function recalcCGPA(){
+calcGp.addEventListener("click", () => {
     let totalCredits = 0;
     let totalWeighted = 0;
 
@@ -190,7 +132,7 @@ function recalcCGPA(){
     totalCreditsEl.textContent = `Your total credits: ${totalCredits}`;
     gpaResultEl.textContent = `Your CGPA: ${cgpa}`;
     resultBox.classList.remove("display-none");
-};
+});
 
 
 const exportBtn = document.getElementById("export");
@@ -222,7 +164,7 @@ exportBtn.addEventListener("click", () => {
         <html>
             <head>
                 <title>CGPA_Export</title>
-                <link rel="stylesheet" href="assets/css/uni_exportstyle.css">
+                <link rel="stylesheet" href="uni_exportstyle.css">
                 <style>
                     body { margin:16mm; font-family: Arial, sans-serif; }
                     .display-none { display: none !important; }
